@@ -150,7 +150,7 @@ def clean_webs(response, name):
 
 def getnickWebs(nick):
     dictWebs=dict()
-    for name,url in urls.iteritems():
+    for name,url in urls.items():
         try:
             url=url.replace("data",nick)
             response=requests.get(url)
@@ -175,7 +175,7 @@ def getnickWebs(nick):
 
 
 def banner():
-    print """                               -                 
+    print ("""                               -                 
                                 -                 
                      .-         .o:               
           .`      .+o-            /s-             
@@ -217,24 +217,24 @@ def banner():
          :s-``                       `..o+        
            ..                         `-.         
  
- """
-    print "-----------------------------------------------------------------------------------------------"
-    print "DANTE'S GATES MINIMAL v 1.0 | <<TIP-1337>> | Buscador De Nicks | QUANTIKA14 | @JORGEWEBSEC"
-    print "     VERSION: 1.0 | 19/02/2019 | INVESTIGA CONMIGO DESDE EL SU | WWW.QUANTIKA14.COM "
+ """)
+    print( "-----------------------------------------------------------------------------------------------")
+    print( "DANTE'S GATES MINIMAL v 1.0 | <<TIP-1337>> | Buscador De Nicks | QUANTIKA14 | @JORGEWEBSEC")
+    print( "     VERSION: 1.0 | 19/02/2019 | INVESTIGA CONMIGO DESDE EL SU | WWW.QUANTIKA14.COM ")
 
 def main():
     banner()
-    print "_______________________________________________________________________________________________"
-    print "| El buscador de nicks no es perfecto. Necesita la colaboración de todos para mejorar.        |"
-    print "| Si quieres ayudarnos con Dante's Gates Minimal Version solo tienes que compartirnos tu idea |"
-    print "| Si hay un fallo o mejoras puedes subirlo en issues aquí:                                    |"
-    print "| https://github.com/Quantika14/osint-suite-tools/issues                                      |"
-    print "|_____________________________________________________________________________________________|"
+    print( "_______________________________________________________________________________________________")
+    print( "| El buscador de nicks no es perfecto. Necesita la colaboración de todos para mejorar.        |")
+    print( "| Si quieres ayudarnos con Dante's Gates Minimal Version solo tienes que compartirnos tu idea |")
+    print( "| Si hay un fallo o mejoras puedes subirlo en issues aquí:                                    |")
+    print( "| https://github.com/Quantika14/osint-suite-tools/issues                                      |")
+    print( "|_____________________________________________________________________________________________|")
 
-    print ""
-    nick = raw_input("Indique el nick que quiere buscar:")
+    print( "")
+    nick = str(input("Indique el nick que quiere buscar:"))
     r_nicks = getnickWebs(nick)
     for n in r_nicks:
-        print "|----[INFO][" + n.upper() + "][>] " + r_nicks.get(n).replace("data", nick)
+        print( "|----[INFO][" + n.upper() + "][>] " + r_nicks.get(n).replace("data", nick))
 
 main()

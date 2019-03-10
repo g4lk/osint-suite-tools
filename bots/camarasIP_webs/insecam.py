@@ -18,29 +18,29 @@ if __name__ == '__main__':
 		pages= int(ul.text.split(",")[1].strip())
 		for i in range(pages):
 			url="https://www.insecam.org/en/bycountry/"+pais+"/?page="+str(i)
-			print "------------------------------------------------------------"
-			print "Page: "+str(i)
+			print( "------------------------------------------------------------")
+			print( "Page: "+str(i))
 			response = requests.get(url, headers=headers)
-			print response
+			print( response)
 			html = response.text
 			soup = BeautifulSoup(html, "html.parser")
 			imgs = soup.findAll("img", attrs={"class":"thumbnail-item__img img-responsive"}) 
 			for img in imgs:
-				print "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-				print "Link: "+ img.get("src")
+				print( "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+				print( "Link: "+ img.get("src"))
 				url="https://www.insecam.org/en/view/"+str(img.get("id")).replace("image","")+"/"
 				response = requests.get(url, headers=headers)
 				html = response.text
 				soup = BeautifulSoup(html, "html.parser")
 				divs = soup.findAll("div", attrs={"class":"camera-details__cell"})
-				print "Country: "+ divs[1].text.strip()
-				print "Country code: "+ divs[3].text.strip()
-				print "Region: "+ divs[5].text.strip()
-				print "City: "+ divs[7].text.strip()
-				print "Latitude: "+ divs[9].text.strip()
-				print "Longitude: "+ divs[11].text.strip()
-				print "ZIP: "+ divs[13].text.strip()
-				print "Timezone: "+ divs[15].text.strip()
-				print "Manufacturer: "+ divs[17].text.strip()
+				print( "Country: "+ divs[1].text.strip())
+				print( "Country code: "+ divs[3].text.strip())
+				print( "Region: "+ divs[5].text.strip())
+				print( "City: "+ divs[7].text.strip())
+				print( "Latitude: "+ divs[9].text.strip())
+				print( "Longitude: "+ divs[11].text.strip())
+				print( "ZIP: "+ divs[13].text.strip())
+				print( "Timezone: "+ divs[15].text.strip())
+				print( "Manufacturer: "+ divs[17].text.strip())
 				ip_dict={"Country": divs[1].text.strip(),"Country code":divs[3].text.strip(),"Region":divs[5].text.strip(),"City":divs[7].text.strip(),"Latitude":divs[9].text.strip(),"Longitude":divs[11].text.strip(),"ZIP":divs[13].text.strip(),"Timezone":divs[15].text.strip(),"Manufacturer":divs[17].text.strip(), "link":img.get("src")}
 				cursor = db.DG_cameras.update({"link":img.get("src")},ip_dict, True)

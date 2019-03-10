@@ -51,7 +51,7 @@ def parse(url, context=''):
       if isMime(ext): fetch_queue.put(href)
       if isUrl(ext): url_queue.put(href)
   except Exception as e:
-    print e 
+    print (e)
 
 
 def fetch(dir):
@@ -62,14 +62,14 @@ def fetch(dir):
       data_url = fetch_queue.get()
       file_path = dir + '/' + data_url.split('/')[-1]
       try:
-        if __debug__: print 'going to fetch: ' + data_url
+        if __debug__: print ('going to fetch: ' + data_url)
         urllib.urlretrieve(data_url, file_path) #urllib2 raise error Todo:
       except:
-        print 'error at fetching '+data_url
+        print ('error at fetching '+data_url)
         continue
 
   except Exception as e:
-    print e  
+    print (e)
 
 
 if __name__ == '__main__':
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
   url_queue.put(args.starturl) #initilize startup url
 
-  print 'start crawling: '
+  print ('start crawling: ')
   while (l<MAX_LOOP) :
     ++l
     if url_queue.empty():
@@ -97,5 +97,5 @@ if __name__ == '__main__':
         fetch(dir)                   
       
       except Exception as e:
-        print e
+        print (e)
 

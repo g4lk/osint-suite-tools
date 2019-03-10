@@ -45,36 +45,36 @@ def remove_tags(text):
 
 #Funciones para buscar en BORME
 def parserLibreborme_json(j):
-    print "|----[INFO][CARGOS EN EMPRESAS ACTUALMENTE][>] "
+    print ("|----[INFO][CARGOS EN EMPRESAS ACTUALMENTE][>] ")
     for cargos_actuales in j["cargos_actuales"]:
-        print u"    - Desde: " + cargos_actuales["date_from"] + " hasta la actualidad."
-        print u"    - Empresa: " + cargos_actuales["name"]
-        print u"    - Cargo: " + cargos_actuales["title"]
+        print (u"    - Desde: {cargos_actuales['date_from']} hasta la actualidad.")
+        print (u"    - Empresa: " + cargos_actuales["name"])
+        print (u"    - Cargo: " + cargos_actuales["title"])
 
         if cargos_actuales["name"]:
 
-            print "|----[INFO][LOCAL DATA][Adjudicaciones][>] Este proceso puede tardar..."
+            print ("|----[INFO][LOCAL DATA][Adjudicaciones][>] Este proceso puede tardar...")
             findData_local.search_adjudicaciones(cargos_actuales["name"])
 
-    print "|----[INFO][CARGOS EN EMPRESAS HISTORICOS][>] "
+    print ("|----[INFO][CARGOS EN EMPRESAS HISTORICOS][>] ")
     for cargos_historicos in j["cargos_historial"]:
         try:
-            print u"    - Desde: " + cargos_historicos["date_from"]
+            print (u"    - Desde: " + cargos_historicos["date_from"])
         except:
             pass
-        print u"    - Hasta: " + cargos_historicos["date_to"]
-        print u"    - Empresa: " + cargos_historicos["name"]
-        print u"    - Cargo: " + cargos_historicos["title"]
+        print (u"    - Hasta: " + cargos_historicos["date_to"])
+        print (u"    - Empresa: " + cargos_historicos["name"])
+        print (u"    - Cargo: " + cargos_historicos["title"])
         
         if cargos_historicos["name"]:
             
-            print "|----[INFO][LOCAL DATA][Adjudicaciones][>] Este proceso puede tardar..."
+            print ("|----[INFO][LOCAL DATA][Adjudicaciones][>] Este proceso puede tardar...")
             findData_local.search_adjudicaciones(cargos_historicos["name"])
     
-    print "|----[FUENTES][BORME][>] "
+    print ("|----[FUENTES][BORME][>] ")
     for boe in j["in_bormes"]:
-        print u"    - CVE: " + boe["cve"]
-        print u"    - URL: " + boe["url"]
+        print (u"    - CVE: " + boe["cve"])
+        print (u"    - URL: " + boe["url"])
 
 def searchLibreborme(apellidos, nombre):
     URL = "https://libreborme.net/borme/api/v1/persona/" + apellidos.replace(" ", "-") + "-" + nombre.replace(" ", "-") + "/"
@@ -94,7 +94,7 @@ def searchLibreborme(apellidos, nombre):
             parserLibreborme_json(j)
 
         except:
-            print "|----[INFO][EMPRESAS][>] No aparecen resultados en el BORME."
+            print ("|----[INFO][EMPRESAS][>] No aparecen resultados en el BORME.")
 
 #Funciones para buscar en Wikipedia
 def searchWikipedia(target):
@@ -104,16 +104,16 @@ def searchWikipedia(target):
         d0 = wikipedia.search(target)
 
         if d0:
-            print "|----[INFO][WIKIPEDIA][>] "
-            print "     |----[INFO][SEARCH][>] "
-            print "     - Resultados encontrados: "
+            print ("|----[INFO][WIKIPEDIA][>] ")
+            print ("     |----[INFO][SEARCH][>] ")
+            print ("     - Resultados encontrados: ")
             for r in d0:
-                print "     - " + r
+                print ("     - " + r)
         else:
-            print "|----[INFO][WIKIPEDIA][>] No aparecen resultados en WIKIPEDIA."
+            print ("|----[INFO][WIKIPEDIA][>] No aparecen resultados en WIKIPEDIA.")
 
     except:
-        print "[!][WARNING][WIKIPEDIA][>] Error en la API..."
+        print ("[!][WARNING][WIKIPEDIA][>] Error en la API...")
 
     try:
         d1 = wikipedia.page(target)
@@ -122,16 +122,16 @@ def searchWikipedia(target):
         urlWIKI = d1.url
 
         if d1:
-            print "     |----[INFO][TAGS][>] "
+            print ("     |----[INFO][TAGS][>] ")
             for l in linksWIKI:
-                print "     - " + l
-            print "|----[FUENTES][WIKIPEDIA][>] "
-            print "     - " + urlWIKI
+                print ("     - " + l)
+            print ("|----[FUENTES][WIKIPEDIA][>] ")
+            print ("     - " + urlWIKI)
         else:
-            print "|----[INFO][WIKIPEDIA][>] No aparecen resultados en WIKIPEDIA."
+            print ("|----[INFO][WIKIPEDIA][>] No aparecen resultados en WIKIPEDIA.")
     
     except:
-        print "[!][WARNING][WIKIPEDIA][>] Error en la API o no aparecen resultados..."
+        print ("[!][WARNING][WIKIPEDIA][>] Error en la API o no aparecen resultados...")
 
 #Funciones para buscar en Youtube
 def searchYoutube(target):
@@ -148,13 +148,13 @@ def searchYoutube(target):
         tmp = 'https://www.youtube.com' + v['href']
         videolist.append(tmp)
     
-    print "|----[INFO][YOUTUBE][>] "
+    print ("|----[INFO][YOUTUBE][>] ")
     for v in vids_titles:
-        print "     - " + v
-        print html
-    print "|----[FUENTES][YOUTUBE][>] "
+        print ("     - " + v)
+        print (html)
+    print ("|----[FUENTES][YOUTUBE][>] ")
     for u in videolist:
-        print "     - " + u
+        print ("     - " + u)
 
 #Funciones para buscar en las Páginas Amarillas
 def cleanPaginasAmarillas_result(r):
@@ -175,8 +175,8 @@ def searchPaginasAmarillas(nombre, a1, a2, loc):
     r = remove_tags(str(r))
 
     if not r == "None":
-        print "|----[INFO][PAGINAS AMARILLAS][>] "
-        print "     - " + str(cleanPaginasAmarillas_result(r))
+        print ("|----[INFO][PAGINAS AMARILLAS][>] ")
+        print ("     - " + str(cleanPaginasAmarillas_result(r)))
     else:
         pass
 
@@ -189,24 +189,24 @@ def searchInfojobs(nombre, a1, a2, loc):
         soup = BeautifulSoup(html, "html.parser")
         h1s = soup.findAll("h1")
         for h1 in h1s:
-            if "humano" in h1:
-                print "|----[INFO][INFOJOBS][>] Captcha detectado..."
+            if "humano" in str(h1):
+                print ("|----[INFO][INFOJOBS][>] Captcha detectado...")
                 break
             else:
-                print "|----[INFO][INFOJOBS][>] " + str(h1)
+                print (f"|----[INFO][INFOJOBS][>] {hl}")
 
 def search_bing_(target):
     urls = searchBing.search_Bing(target)
     for url in urls:
         try:
-            print "[|----[INFO][BING][>] " + str(url)
-            print parser.parser_email(requests.get(url).text)
-            print parser.parser_n_tlfn(requests.get(url).text)
+            print ("[|----[INFO][BING][>] " + str(url))
+            print (parser.parser_email(requests.get(url).text))
+            print (parser.parser_n_tlfn(requests.get(url).text))
         except:
             pass
 
 def banner():
-    print """
+    print ("""
                                                                                                         
                              -:--:::-...-::---..` `                                                 
                            `+s+so+++/++:---:::--:::::-::------..```                                 
@@ -233,27 +233,27 @@ def banner():
                                   mmhss+hhmdhsshmmyoo/.      ymdhyyo+///+++/:---`                   
                                   hNmdhhmdmdyydmy+o/.        -mddhhys+//o++//--:--`                 
                                    /mMMNmdmNmdyo+:`           +ddddhyo//ooo+:--:::--.`              
-                                     :+syhhyo/:.               odddhhs+/+sso+:.:::::::-.`         """
-    print "-----------------------------------------------------------------------------------------------"
-    print "DANTE'S GATES MINIMAL v 1.0 | <<TIP-1337>> | Gorgue de Triana | QUANTIKA14 | @JORGEWEBSEC"
-    print "     VERSION: 1.0 | 09/02/2019 | INVESTIGA CONMIGO DESDE EL SU | WWW.QUANTIKA14.COM "
+                                     :+syhhyo/:.               odddhhs+/+sso+:.:::::::-.`         """)
+    print ("-----------------------------------------------------------------------------------------------")
+    print ("DANTE'S GATES MINIMAL v 1.0 | <<TIP-1337>> | Gorgue de Triana | QUANTIKA14 | @JORGEWEBSEC")
+    print ("     VERSION: 1.0 | 09/02/2019 | INVESTIGA CONMIGO DESDE EL SU | WWW.QUANTIKA14.COM ")
 
 def menu():
-    print ""
-    print "-----------------------------------------------------------------------------------------------"
-    print "Dante's Gates Minimal Version es un buscador inteligente para hacer OSINT de forma automática."
-    print "Toda la información es siempre de fuentes abiertas y siempre se dará la dirección de las fuentes"
-    print ""
-    print "________________________________________"
-    print "| 1. Nombre y apellidos                |"
-    print "| 2. Nombre, apellidos y ciudad        |"
-    print "|______________________________________|"
+    print ("")
+    print ("-----------------------------------------------------------------------------------------------")
+    print ("Dante's Gates Minimal Version es un buscador inteligente para hacer OSINT de forma automática.")
+    print ("Toda la información es siempre de fuentes abiertas y siempre se dará la dirección de las fuentes")
+    print ("")
+    print ("________________________________________")
+    print ("| 1. Nombre y apellidos                |")
+    print ("| 2. Nombre, apellidos y ciudad        |")
+    print ("|______________________________________|")
 
-    m = int(raw_input("Selecciona 1/2: "))
+    m = int(input("Selecciona 1/2: "))
     if m == 1:
-        nombre = raw_input(u"Por favor indique el nombre: ")
-        apellido1 = raw_input(u"Por favor indique el primer apellido: ")
-        apellido2 = raw_input(u"Por favor indique el segundo apellido: ")
+        nombre = str(input(u"Por favor indique el nombre: "))
+        apellido1 = str(input(u"Por favor indique el primer apellido: "))
+        apellido2 = str(input(u"Por favor indique el segundo apellido: "))
 
         #Limpiamos de acentos
         nombre = er.replace_acentos(nombre)
@@ -273,16 +273,16 @@ def menu():
         searchYoutube(target)
         search_bing_(target)
 
-        print ""
-        print "[--------------------------------------------------]"
-        print ""
+        print ("")
+        print ("[--------------------------------------------------]")
+        print ("")
         findData_local.search_and_find_data(nombre, apellido1, apellido2)
 
     if m == 2:
-        nombre = raw_input(u"Por favor indique el nombre: ")
-        apellido1 = raw_input(u"Por favor indique el primer apellido: ")
-        apellido2 = raw_input(u"Por favor indique el segundo apellido: ")
-        loc = raw_input(u"Por favor indique la ciudad: ")
+        nombre = str(input(u"Por favor indique el nombre: "))
+        apellido1 = str(input(u"Por favor indique el primer apellido: "))
+        apellido2 = str(input(u"Por favor indique el segundo apellido: "))
+        loc = str(input(u"Por favor indique la ciudad: "))
 
         #Limpiamos de acentos
         nombre = er.replace_acentos(nombre)
@@ -304,9 +304,9 @@ def menu():
         searchYoutube(target)
         searchPaginasAmarillas(nombre, apellido1, apellido2, loc)
         searchInfojobs(nombre, apellido1, apellido2, loc)
-        print ""
-        print "[--------------------------------------------------]"
-        print ""
+        print ("")
+        print ("[--------------------------------------------------]")
+        print ("")
         findData_local.search_and_find_data(nombre, apellido1, apellido2)
 
 

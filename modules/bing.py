@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
 
-import requests, urllib2, re, sys
+import requests, urllib.request, re, sys
 from bs4 import BeautifulSoup
 
 
@@ -21,10 +21,10 @@ def SendRequest(url):
 
 		response=requests.get(url,allow_redirects=True, timeout=15, verify=True)	
 	except requests.exceptions.RequestException as e:
-		print "\nError connection to server!",
+		print( "\nError connection to server!")
 		pass
 	except requests.exceptions.ConnectTimeout as e:
-		print "\nError Timeout + dork"
+		print( "\nError Timeout + dork")
 		pass
 	content = response.text 
 	return parser_html(content)
